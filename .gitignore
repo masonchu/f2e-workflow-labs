@@ -50,3 +50,4 @@ dist/
 ### Sass ###
 .sass-cache/
 *.css.map
+assets/vendor
