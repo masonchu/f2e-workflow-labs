@@ -1,6 +1,6 @@
 {
   "name": "f2e-workflow-labs",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "homepage": "https://github.com/masonchu/f2e-workflow-labs",
   "authors": [
     "Mason Chu <masonchu@gmail.com>"
@@ -23,5 +23,5 @@
     "jquery": "2",
     "moment": "~2.10.6",
     "toastr": "~2.1.2"
-    }
+  }
 }
