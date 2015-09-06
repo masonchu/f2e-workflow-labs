@@ -236,6 +236,64 @@
     }
 })();
 
+(function () {
+    'use strict';
+
+    angular
+        .module('app.widgets')
+        .directive('htImgPerson', htImgPerson);
+
+    htImgPerson.$inject = ['config'];
+    /* @ngInject */
+    function htImgPerson (config) {
+        //Usage:
+        //<img ht-img-person="{{person.imageSource}}"/>
+        var basePath = config.imageBasePath;
+        var unknownImage = config.unknownPersonImageSource;
+        var directive = {
+            link: link,
+            restrict: 'A'
+        };
+        return directive;
+
+        function link(scope, element, attrs) {
+            attrs.$observe('htImgPerson', function (value) {
+                value = basePath + (value || unknownImage);
+                attrs.$set('src', value);
+            });
+        }
+    }
+})();
+
+(function() {
+    'use strict';
+
+    angular
+        .module('app.widgets')
+        .directive('htWidgetHeader', htWidgetHeader);
+
+    /* @ngInject */
+    function htWidgetHeader() {
+        //Usage:
+        //<div ht-widget-header title="vm.map.title"></div>
+        // Creates:
+        // <div ht-widget-header=""
+        //      title="Movie"
+        //      allow-collapse="true" </div>
+        var directive = {
+            scope: {
+                'title': '@',
+                'subtitle': '@',
+                'rightText': '@',
+                'allowCollapse': '@'
+            },
+            templateUrl: 'app/widgets/widget-header.html',
+            restrict: 'EA'
+        };
+        return directive;
+    }
+})();
+
 (function() {
     'use strict';
 
@@ -379,64 +437,6 @@
             var menuName = route.title;
             return $state.current.title.substr(0, menuName.length) === menuName ? 'current' : '';
         }
-    }
-})();
-
-(function () {
-    'use strict';
-
-    angular
-        .module('app.widgets')
-        .directive('htImgPerson', htImgPerson);
-
-    htImgPerson.$inject = ['config'];
-    /* @ngInject */
-    function htImgPerson (config) {
-        //Usage:
-        //<img ht-img-person="{{person.imageSource}}"/>
-        var basePath = config.imageBasePath;
-        var unknownImage = config.unknownPersonImageSource;
-        var directive = {
-            link: link,
-            restrict: 'A'
-        };
-        return directive;
-
-        function link(scope, element, attrs) {
-            attrs.$observe('htImgPerson', function (value) {
-                value = basePath + (value || unknownImage);
-                attrs.$set('src', value);
-            });
-        }
-    }
-})();
-
-(function() {
-    'use strict';
-
-    angular
-        .module('app.widgets')
-        .directive('htWidgetHeader', htWidgetHeader);
-
-    /* @ngInject */
-    function htWidgetHeader() {
-        //Usage:
-        //<div ht-widget-header title="vm.map.title"></div>
-        // Creates:
-        // <div ht-widget-header=""
-        //      title="Movie"
-        //      allow-collapse="true" </div>
-        var directive = {
-            scope: {
-                'title': '@',
-                'subtitle': '@',
-                'rightText': '@',
-                'allowCollapse': '@'
-            },
-            templateUrl: 'app/widgets/widget-header.html',
-            restrict: 'EA'
-        };
-        return directive;
     }
 })();
 
